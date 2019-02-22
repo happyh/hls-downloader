@@ -64,6 +64,7 @@ func BuildSegments(u string) ([]string, error) {
 	p, err := GetPlaylist(u)
 	if err != nil {
 		Info.Printf("url: %s, error: no m3u8 data found\n", u)
+		fmt.Println(err)
 		return nil, err
 	}
 

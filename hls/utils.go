@@ -50,10 +50,23 @@ func FilePutContents(filename string, content string) (val bool, err error) {
 }
 
 func FileGetContents(uri string) (str string, err error) {
-	url := strings.ToLower(strings.TrimSpace(uri))
+	//url := strings.ToLower(strings.TrimSpace(uri))
+	url := uri
 
 	if strings.HasPrefix(url, "http://") || strings.HasPrefix(url, "https://") {
-		resp, err := http.Get(url)
+		client := &http.Client{}
+		//提交请求
+		request, err := http.NewRequest("GET", url, nil)
+
+		//增加header选项
+		//request.Header.Add("Cookie", "xxxxxx")
+		request.Header.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36")
+		//request.Header.Add("X-Requested-With", "xxxx")
+
+		if err != nil {
+			panic(err)
+		}
+		resp, err := client.Do(request)
 
 		if err != nil {
 			return "", err

@@ -5,8 +5,8 @@ import (
 	"os"
 	"runtime"
 
+	"./hls"
 	"github.com/urfave/cli"
-	"github.com/vus520/go-hls/hls"
 )
 
 func DownloadCli(c *cli.Context) error {
